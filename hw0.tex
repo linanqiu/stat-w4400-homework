@@ -1,15 +1,105 @@
 \documentclass[11pt]{scrartcl}
 \usepackage{dominatrix}
-\usepackage{colortbl}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.9}
-%\renewcommand\thesubsection{\alph{subsection}}
-\definecolor{light-gray}{gray}{0.75}
-\title{}
-\subject{}
-\author{}
+
+\title{Homework 0}
+\subject{Statistical Machine Learning (STAT W4400)}
+\author{Linan Qiu\\\texttt{lq2137}}
 \begin{document}
 \maketitle
+
+Let 
+
+\[
+A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}, \; B = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}, \; x = \begin{bmatrix} 2 \\ 1 \end{bmatrix}
+\]
+
+\begin{enumerate}
+\item $B_{2,1}$ is $3$
+
+\item $A+B = \begin{bmatrix} 2 & 4 \\ 5 & 8 \end{bmatrix}$
+
+\item $AB = \begin{bmatrix} 1 * 1 + 2 * 3 & 1 * 2 + 2 * 4 \\ 2 * 1 + 4 * 3 & 2 * 2 + 4 * 4 \end{bmatrix} = \begin{bmatrix} 7 & 10 \\ 14 & 20 \end{bmatrix}$
+
+\item $rank(A) = 1$
+
+\begin{align*}
+Av &= \lambda v \\
+(A - \lambda I)v &= 0 \\
+det(A - \lambda I) &= 0 \\
+&= (1-\lambda)(4-\lambda)-4 \\
+&= \lambda^2 - 5\lambda \\
+&= \lambda(\lambda-5) 
+\end{align*}
+\item Largest eigenvalue of $A$ is $5$
+
+\begin{align*}
+(A - \lambda I) v &= 0 \\
+(A - 5I) v &= 0 \\
+\begin{bmatrix} 1 - 5 & 2 \\ 2 & 4 - 5 \end{bmatrix} \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} &= 0
+\end{align*}
+Then,
+\begin{align*}
+-4v_1 + 2v_2 &= 0 \\
+2v_1 -1v_2 &= 0
+\end{align*}
+Then, let $v_2 = t$, $v_1 = -2t$. Then, the eigenspace corresponding to $\lambda = 5$ is given by the span of $\begin{bmatrix} -2 \\ 1 \end{bmatrix}$.
+\item Eigenvector associated is the span of $v = \begin{bmatrix} 0 \\ 0 \end{bmatrix}$
+
+\item $|B| = 1*4 - 2*3 = -2$
+
+\item $x^T Ax = \begin{bmatrix} 2 & 1 \end{bmatrix} \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} = 16$
+
+\item $x^T x = \begin{bmatrix} 2 & 1 \end{bmatrix} \begin{bmatrix} 2 \\ 1 \end{bmatrix} = 5$
+
+\item $x x^T = \begin{bmatrix} 2 \\ 1 \end{bmatrix} \begin{bmatrix} 2 & 1 \end{bmatrix} = \begin{bmatrix} 4 & 2 \\ 2 & 1 \end{bmatrix}$
+
+\item $||x||_2 = \sqrt{(2-1)^2} = 1$
+
+\item 
+
+\item
+
+\item $n=2$
+
+\begin{align*}
+Var(y) &= E(y)^2 - E(y^2) \\
+E(y^2) &= E(y)^2 - Var(y) \\
+&= \mu^2 - \sigma^2
+\end{align*}
+\item $E(y^2) = \mu^2 - \sigma^2$
+
+\item $y + w \sim N(2.7 + 3.1, \sqrt{8^2 + 15^2}) = N(5.8, 17)$
+
+\item The normalizing constant is $(2\pi)^{\frac{p}{2}} |\Sigma|^{\frac{1}{2}}$ where $p=2$ and $|\Sigma|$ is the determinant of the $\Sigma$ given.
+
+\item The support of a Bernoulli random variable is $\{0,1\}$
+
+\item Define the Bernoulli process as $N(k,n)$. Then $N(k,n) = \begin{pmatrix}n \\ k\end{pmatrix} = \frac{n!}{k!(n-k)!}$
+
+\begin{align*}
+h(x_1) &= \frac{1}{3}x_1^3 - \frac{1}{2}x_1^2 - 6x_1 + \frac{27}{2} \\
+h'(x_1) &= x_1^2 - x_1 - 6 \\
+h''(x_1) &= 2x_1 - 1
+\end{align*}
+Global minima/maxima is at
+\begin{align*}
+h'(x_1) &= x_1^2 - x_1 - 6 = 0 \\
+(x_1 - 3)(x_1+2) &= 0
+\end{align*}
+$x_1 = 3$ is a minima since $h''(3) > 0$. $x_1 = -2$ is a global maxima since $h''(-2) < 0$
+\item $x_1 = -2$
+
+\item $x_1 = 3$
+
+\item 
+
+\item
+
+\item
+
+\item
+
+\end{enumerate}
 
 
 
