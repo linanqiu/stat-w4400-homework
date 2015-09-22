@@ -42,8 +42,8 @@ Then,
 -4v_1 + 2v_2 &= 0 \\
 2v_1 -1v_2 &= 0
 \end{align*}
-Then, let $v_2 = t$, $v_1 = -2t$. Then, the eigenspace corresponding to $\lambda = 5$ is given by the span of $\begin{bmatrix} -2 \\ 1 \end{bmatrix}$.
-\item Eigenvector associated is the span of $v = \begin{bmatrix} -2 \\ 1 \end{bmatrix}$
+Then, let $v_1 = t$, $v_2 = 2t$.
+\item The eigenvector asociated with the largest eigenvalue 5 of A is $\begin{bmatrix}1 \\ 2\end{bmatrix}$
 
 \item $|B| = 1*4 - 2*3 = -2$
 
@@ -58,12 +58,12 @@ Then, let $v_2 = t$, $v_1 = -2t$. Then, the eigenspace corresponding to $\lambda
 \[\nabla_x x^T Ax = x^T A^T + x^T A = x^T (A^T + A)\]
 For the special case that $A$ is symmetric (as it is given), 
 \[\nabla_x x^T Ax = 2x^T A\]
-\item $\nabla_x x^T Ax = 2x^T A$
+\item $\nabla_x x^T Ax = 2x^T A = 2 \begin{bmatrix} 2 & 1 \end{bmatrix} \begin{bmatrix}1 & 2 \\ 2 & 4\end{bmatrix} = \begin{bmatrix} 8 & 16 \end{bmatrix}$
 
 \[\nabla_x^2 x^T Ax = \nabla_x \left(x^T A^T + x^T A \right) = A + A^T\]
 For the special case that $A$ is symmetric (as it is given),
 \[\nabla_x^2 x^T Ax = 2A\]
-\item $\nabla_x^2 x^T Ax = 2A$
+\item $\nabla_x^2 x^T Ax = 2A = \begin{bmatrix}2 & 4 \\ 4 & 8 \end{bmatrix}$
 
 \item $n=2$
 
@@ -76,7 +76,7 @@ E(y^2) &= E(y)^2 - Var(y) \\
 
 \item $y + w \sim N(2.7 + 3.1, \sqrt{8^2 + 15^2}) = N(5.8, 17)$
 
-\item The normalizing constant is $(2\pi)^{\frac{p}{2}} |\Sigma|^{\frac{1}{2}}$ where $p=2$ and $|\Sigma|$ is the determinant of the $\Sigma$ given.
+\item The normalizing constant is $(2\pi)^{\frac{p}{2}} |\Sigma|^{\frac{1}{2}}$ where $p=2$ and $|\Sigma| = 9$ is the determinant of the $\Sigma$ given. Hence the normalizing constant is $\frac{1}{\sqrt{36\pi^2}}$
 
 \item The support of a Bernoulli random variable is $\{0,1\}$
 
