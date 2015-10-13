@@ -91,5 +91,76 @@ and solving accordingly.
 
 \section{SVM}
 
+\subsection{Cross Validation Estimates}
+
+\begin{figure}[H]
+\centering\includegraphics[width=\textwidth]{./hw2/r/tune_linear.pdf}
+\caption{Plot of error against margin parameter (cost) for linear kernel SVM}
+\end{figure}
+
+\begin{figure}[H]
+\centering\includegraphics[width=\textwidth]{./hw2/r/tune_rbf.pdf}
+\caption{Plot of error against margin parameter (cost) for different kernel bandwidth (gamma) for RBF kernel SVM}
+\end{figure}
+
+\subsection{Test}
+
+Selected parameter values are:
+
+\begin{lstlisting}
+> summary(tuned_linear)
+
+Parameter tuning of 'svm':
+
+- sampling method: 10-fold cross validation 
+
+- best parameters:
+        cost
+ 0.001953125
+
+- best performance: 0.258095 
+
+> summary(tuned_rbf)
+
+Parameter tuning of 'svm':
+
+- sampling method: 10-fold cross validation 
+
+- best parameters:
+ gamma cost
+ 0.001    2
+
+- best performance: 0.1704325
+\end{lstlisting}
+
+It seems from the training data tuning that the RBF kernel has a better performance. However, upon testing, this is not immediately clear.
+
+\begin{lstlisting}
+> classAgreement(table(pred = linear_predict, true = testset[, ncol(data)]))
+$diag
+[1] 0.025
+
+$kappa
+[1] 0
+
+$rand
+[1] 0.5076923
+
+$crand
+[1] 0
+
+> classAgreement(table(pred = rbf_predict, true = testset[, ncol(data)]))
+$diag
+[1] 0.025
+
+$kappa
+[1] 0
+
+$rand
+[1] 0.5076923
+
+$crand
+[1] 0
+\end{lstlisting}
 
 \end{document}

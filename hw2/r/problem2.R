@@ -65,11 +65,13 @@ sum(test_accuracy == 0) / length(test_accuracy)
 intercept = - train_results$z[3] / train_results$z[2]
 slope = - train_results$z[1] / train_results$z[2]
 df_test = as.data.frame(test)
-plot = ggplot(df_test) + geom_point(data = df_test, aes(S.1, S.2, colour=factor(y))) + geom_abline(slope = slope, intercept = intercept)
+plot = ggplot() + geom_point(data = df_test, aes(S.1, S.2, colour=factor(y))) + geom_abline(slope = slope, intercept = intercept)
 plot
 
 ## train
 df_train = as.data.frame(train)
 intercepts = - train_results$z_history[, 3] / train_results$z_history[, 2]
 slopes = train_results$z_history[, 1] / train_results$z_history[, 2]
-plot = ggplot() + geom_point(data = df_train, aes(S.1, S.2, colour=factor(y))) + geom_abline(slope = slopes, intercept = intercepts)
+history_colours = seq(1, length(slopes))
+plot = ggplot() + geom_point(data = df_train, aes(S.1, S.2, colour=factor(y))) + geom_abline(slope = slopes, intercept = intercepts, alpha=history_colours/length(history_colours))
+plot
