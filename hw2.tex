@@ -1,0 +1,95 @@
+\documentclass[11pt]{scrartcl}
+\usepackage{dominatrix}
+\usepackage{solarized-light}
+\lstset{
+language=R
+}
+
+\newcommand{\sgn}{\ensuremath{\mathrm{sgn}}}
+
+\usepackage{dsfont}
+
+\title{Homework 2}
+\subject{Statistical Machine Learning (STAT W4400)}
+\author{Linan Qiu\\\texttt{lq2137}}
+\begin{document}
+\maketitle
+
+\section{Linear Classification}
+
+\subsection{Classification Results}
+
+$\mathbf{v}_h$ is a unit vector.
+
+\begin{lstlisting}
+vh = matrix(c(1/sqrt(2), 1/sqrt(2)), nrow=2)
+c = 1/(2 * sqrt(2))
+x1 = matrix(c(-3, 0), nrow=2)
+x2 = matrix(c(1/2, 1/2), nrow=2)
+
+> sign(crossprod(x1, vh) - c)
+     [,1]
+[1,]   -1
+> sign(crossprod(x2, vh) - c)
+     [,1]
+[1,]    1
+\end{lstlisting}
+
+\[r_1 = \sgn(<\mathbf{x}_1, \mathbf{v}_h> - c) = -1 \]
+\[r_1 = \sgn(<\mathbf{x}_2, \mathbf{v}_h> - c) = 1 \]
+
+\subsection{SVM with Margin}
+
+The values of the cross products with offset $c$ are as follows:
+
+\begin{lstlisting}
+> crossprod(x1, vh) - c
+          [,1]
+[1,] -2.474874
+> crossprod(x2, vh) - c
+          [,1]
+[1,] 0.3535534
+\end{lstlisting}
+
+$\mathbf{x}_1$ is still on the negative side and classified the same. However, $\mathbf{x}_2$ is not greater than the margin of 1, hence will not be classified as positive. If $\mathbf{x}_2$ was in the training set, $\mathbf{v}_h$ and $c$ would not have been selected as the classifier as the classifier for a SVM with margin would have ensured that $<\mathbf{v}_h, \mathbf{x}> - c > 1$ or $< -1$ for all training data.
+
+\subsection{Cost Function Approximated by Perceptron Cost Function}
+
+It approximates the empirical risk function. Empirical risk function is piece-wise constant, hence would not allow us to gradient descent optimally. The perceptron cost function, by using $\left|\left<\mathbf{z} ,\begin{pmatrix}1 \\ \tilde{\mathbf{x}}_i \end{pmatrix}\right>\right|$ instead of just the loss function.
+
+\section{Perceptron}
+
+\subsection{Classify}
+
+Included in file \texttt{problem2.R}
+
+\subsection{Perceptron Training Algorithm}
+
+Included in file \texttt{problem2.R}
+
+\subsection{Train and Test}
+
+Included in file \texttt{problem2.R}
+
+\subsection{2D Representation}
+
+Slope can be obtained from $\mathbf{v}_h$ by
+
+\[v_x x + v_y y - c = 0\]
+
+and solving accordingly.
+
+\begin{figure}[H]
+\centering\includegraphics[width=\textwidth]{./hw2/r/test.pdf}
+\caption{Plot of test data against obtained classifier from \texttt{z}.}
+\end{figure}
+
+\begin{figure}[H]
+\centering\includegraphics[width=\textwidth]{./hw2/r/train.pdf}
+\caption{Plot of training data against history of classifiers from \texttt{z\_history}. Earlier iterations have lower alpha.}
+\end{figure}
+
+\section{SVM}
+
+
+\end{document}
