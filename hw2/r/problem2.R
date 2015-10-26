@@ -71,7 +71,7 @@ plot
 ## train
 df_train = as.data.frame(train)
 intercepts = - train_results$z_history[, 3] / train_results$z_history[, 2]
-slopes = train_results$z_history[, 1] / train_results$z_history[, 2]
+slopes = - train_results$z_history[, 1] / train_results$z_history[, 2]
 history_colours = seq(1, length(slopes))
 plot = ggplot() + geom_point(data = df_train, aes(S.1, S.2, colour=factor(y))) + geom_abline(slope = slopes, intercept = intercepts, alpha=history_colours/length(history_colours))
 plot

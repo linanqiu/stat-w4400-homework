@@ -15,6 +15,8 @@ language=R
 \begin{document}
 \maketitle
 
+\textbf{Note: since submission only allows \texttt{.pdf} and \texttt{.R}, I did not preserve the directory structure of this project. The \texttt{.R} files will not run properly due to imports and assumed directory structure. For a functional version, go to \url{https://github.com/linanqiu/stat-w4400-homework/tree/master/hw2/r}}
+
 \section{Linear Classification}
 
 \subsection{Classification Results}
@@ -40,18 +42,11 @@ x2 = matrix(c(1/2, 1/2), nrow=2)
 
 \subsection{SVM with Margin}
 
-The values of the cross products with offset $c$ are as follows:
+Concept of margin applies only to training, not classification. Classification works for any linear classifier. For the test point $\mathbf{x}$,
 
-\begin{lstlisting}
-> crossprod(x1, vh) - c
-          [,1]
-[1,] -2.474874
-> crossprod(x2, vh) - c
-          [,1]
-[1,] 0.3535534
-\end{lstlisting}
+\[r = \sgn(<\mathbf{x}_1, \mathbf{v}_h> - c)\]
 
-$\mathbf{x}_1$ is still on the negative side and classified the same. However, $\mathbf{x}_2$ is not greater than the margin of 1, hence will not be classified as positive. If $\mathbf{x}_2$ was in the training set, $\mathbf{v}_h$ and $c$ would not have been selected as the classifier as the classifier for a SVM with margin would have ensured that $<\mathbf{v}_h, \mathbf{x}> - c > 1$ or $< -1$ for all training data.
+still applies. Hence the predicted classes will still be the same.
 
 \subsection{Cost Function Approximated by Perceptron Cost Function}
 
@@ -108,7 +103,7 @@ and solving accordingly.
 Selected parameter values are:
 
 \begin{lstlisting}
-> summary(tuned_linear)
+> tuned_linear
 
 Parameter tuning of 'svm':
 
@@ -118,9 +113,9 @@ Parameter tuning of 'svm':
         cost
  0.001953125
 
-- best performance: 0.258095 
+- best performance: 0.025 
 
-> summary(tuned_rbf)
+> tuned_rbf
 
 Parameter tuning of 'svm':
 
@@ -128,39 +123,46 @@ Parameter tuning of 'svm':
 
 - best parameters:
  gamma cost
- 0.001    2
+ 0.001  0.5
 
-- best performance: 0.1704325
+- best performance: 0.01875 
 \end{lstlisting}
 
 It seems from the training data tuning that the RBF kernel has a better performance. However, upon testing, this is not immediately clear.
 
 \begin{lstlisting}
+> linear_model = svm(labels ~ ., data=data, method="C-classification", kernel="linear", cost=tuned_linear$best.parameter$cost[1])
+> linear_predict = predict(linear_model, testset[, -ncol(data)])
 > classAgreement(table(pred = linear_predict, true = testset[, ncol(data)]))
 $diag
-[1] 0.025
+[1] 0.975
 
 $kappa
-[1] 0
+[1] 0.9497487
 
 $rand
-[1] 0.5076923
+[1] 0.95
 
 $crand
-[1] 0
+[1] 0.8999645
 
+> 
+> rbf_model = svm(labels ~ ., data=data, method="C-classification", kernel="radial", cost=tuned_rbf$best.parameter$cost[1], gamma=tuned_rbf$best.parameter$gamma[1])
+> rbf_predict = predict(rbf_model, testset[, -ncol(data)])
 > classAgreement(table(pred = rbf_predict, true = testset[, ncol(data)]))
 $diag
-[1] 0.025
+[1] 0.975
 
 $kappa
-[1] 0
+[1] 0.9497487
 
 $rand
-[1] 0.5076923
+[1] 0.95
 
 $crand
-[1] 0
+[1] 0.8999645
 \end{lstlisting}
+
+Both models give the same accuracy rate (hence misclassification rate).
 
 \end{document}
