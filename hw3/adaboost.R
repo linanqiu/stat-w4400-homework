@@ -18,6 +18,7 @@ adaboost = function(X, y, B, K=5) {
   alphas = vector(length=B)
   
   errors_train = vector(length=B)
+  errors_test = vector(length=B)
   
   interval = trunc(nrow(X)/K)
   
@@ -59,12 +60,12 @@ adaboost = function(X, y, B, K=5) {
     alphas[b] = alpha
     
     errors_train[b] = evaluate(b, X, y, alphas[1:b], classifiers)
-    
+    errors_test[b] = evaluate(b, testdata, testlabels, alphas[1:b], classifiers)
     
     # update w
     w = w * exp(alpha * incorrects)
   }
-  return(list(allPars=classifiers, alphas=alphas, errors_train=errors_train))
+  return(list(allPars=classifiers, alphas=alphas, errors_train=errors_train, errors_test=errors_test))
 }
 
 evaluate = function(i, data, labels, alphas, allPars) {
@@ -76,12 +77,11 @@ evaluate = function(i, data, labels, alphas, allPars) {
 
 B = 1000
 c = adaboost(traindata, trainlabels, B)
-results = sapply(1:B, evaluate, data=testdata, labels=testlabels, alphas=c$alphas, allPars=c$allPars)
 
 library(ggplot2)
 library(reshape)
-df = list(index=1:B, errors_train=c$errors_train, errors_test=results)
+df = list(index=1:B, errors_train=c$errors_train, errors_test=c$errors_test)
 df = as.data.frame(df)
 melted = melt(df, id=c('index'))
-plot = ggplot(data=subset(melted, index<500)) + geom_line(aes(x=index, y=value, color=factor(variable))) + labs(title="Errors", x="Iterations", y="Errors")
+plot = ggplot(data=subset(melted, index<1000)) + geom_line(aes(x=index, y=value, color=factor(variable))) + labs(title="Errors", x="Iterations", y="Errors")
 plot
